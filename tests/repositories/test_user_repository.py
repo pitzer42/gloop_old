@@ -1,4 +1,4 @@
-from engine.models.user import User
+from gloop.models.user import User
 
 from tests.utils import sync
 from tests.repositories.user_repo_test_case import UserRepositoryTestCase

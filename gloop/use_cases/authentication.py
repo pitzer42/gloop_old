@@ -1,7 +1,7 @@
 import bcrypt
 from time import time
 
-from engine.repositories.user_repository import UserRepository
+from gloop.repositories.user_repository import UserRepository
 
 
 class Authentication:

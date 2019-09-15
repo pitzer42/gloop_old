@@ -1,4 +1,4 @@
-import engine.repositories.schemas.user_schema as schema
+import gloop.repositories.schemas.user_schema as schema
 
 
 def user_to_secure_json_serializable_dict(user_data: dict) -> dict:

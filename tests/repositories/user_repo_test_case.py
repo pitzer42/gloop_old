@@ -1,7 +1,7 @@
 from unittest import TestCase
 
-from engine.repositories.mongo import mongo_user_repository_factory
-from engine.repositories.user_repository import UserRepository
+from gloop.repositories.mongo import mongo_user_repository_factory
+from gloop.repositories.user_repository import UserRepository
 
 
 from tests.utils import sync

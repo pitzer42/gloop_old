@@ -1,9 +1,9 @@
 from aiohttp.test_utils import AioHTTPTestCase
 
-from engine.web.server import create_game_app
+from gloop.web.server import create_game_app
 
-from engine.models.remote_party import RemoteParty
-from engine.models.remote_player import RemotePlayer
+from gloop.models.remote_party import RemoteParty
+from gloop.models.remote_player import RemotePlayer
 
 
 async def test_game_loop(player: RemotePlayer, party: RemoteParty):

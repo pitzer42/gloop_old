@@ -2,7 +2,7 @@ import asyncio
 
 from typing import NoReturn
 
-from engine.models.remote_player import RemotePlayer
+from gloop.models.remote_player import RemotePlayer
 
 
 class RemoteParty(list):

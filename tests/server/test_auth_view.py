@@ -1,7 +1,7 @@
 from tests.server.game_server_test_case import GameServerTestCase
 
-from engine.web.views.auth_view import AuthView
-from engine.web.views.user_view import UserView
+from gloop.web.views.auth_view import AuthView
+from gloop.web.views.user_view import UserView
 
 from tests.utils import sync
 

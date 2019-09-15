@@ -3,9 +3,9 @@ from bcrypt import (
     hashpw
 )
 
-from engine.models.user import User
+from gloop.models.user import User
 
-import engine.repositories.schemas.user_schema as schema
+import gloop.repositories.schemas.user_schema as schema
 
 
 def pass_by(x):

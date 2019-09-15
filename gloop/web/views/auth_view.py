@@ -2,14 +2,14 @@ from aiohttp import web
 
 from aiohttp_cors import CorsViewMixin
 
-import engine.web.app_schema as app_schema
+import gloop.web.app_schema as app_schema
 
-from engine.web.views.data_ports import (
+from gloop.web.views.data_ports import (
     json_to_credentials,
     token_to_authentication_json
 )
 
-from engine.use_cases.authentication import Authentication
+from gloop.use_cases.authentication import Authentication
 
 
 class AuthView(web.View, CorsViewMixin):

@@ -4,7 +4,7 @@ from tests.utils import sync
 
 import tests.mocks.dummy_user_factory as dummies
 
-from engine.web.views.user_view import UserView
+from gloop.web.views.user_view import UserView
 
 
 class TestUserView(GameServerTestCase):

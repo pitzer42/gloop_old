@@ -3,8 +3,8 @@ from setuptools import setup
 setup(
     name='gloop',
     version='',
-    packages=['engine', 'engine.web', 'engine.web.views', 'engine.models', 'engine.use_cases', 'engine.repositories',
-              'engine.repositories.schemas'],
+    packages=['gloop', 'gloop.web', 'gloop.web.views', 'gloop.models', 'gloop.use_cases', 'gloop.repositories',
+              'gloop.repositories.schemas'],
     url='',
     license='',
     author='Arthur Pitzer',

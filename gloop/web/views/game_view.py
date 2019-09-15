@@ -2,10 +2,10 @@ from aiohttp import web
 
 from aiohttp_cors import CorsViewMixin
 
-from engine.use_cases.start_game import StartGame
+from gloop.use_cases.start_game import StartGame
 
-from engine.web import app_schema
-from engine.web.ws_player import WebSocketPlayer
+from gloop.web import app_schema
+from gloop.web.ws_player import WebSocketPlayer
 
 
 class GameView(web.View, CorsViewMixin):

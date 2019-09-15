@@ -2,10 +2,10 @@
 
 rm *.dot
 
-pyreverse -AS engine
-rm -rf diagrams/engine
-mkdir diagrams/engine
-mv *.dot diagrams/engine/.
+pyreverse -AS gloop
+rm -rf diagrams/gloop
+mkdir diagrams/gloop
+mv *.dot diagrams/gloop/.
 
 pyreverse -AS game
 rm -rf diagrams/game

@@ -2,10 +2,10 @@ from typing import List, NoReturn
 
 from motor.motor_asyncio import AsyncIOMotorClient
 
-from engine.models.user import User
-from engine.repositories.user_repository import UserRepository
-import engine.repositories.schemas.user_schema as schema
-from engine.repositories.data_ports import (
+from gloop.models.user import User
+from gloop.repositories.user_repository import UserRepository
+import gloop.repositories.schemas.user_schema as schema
+from gloop.repositories.data_ports import (
     dict_to_user,
     user_to_password_hashed_dict
 )

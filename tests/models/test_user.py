@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from engine.models.user import User
+from gloop.models.user import User
 
 import tests.mocks.dummy_user_factory as dummies
 

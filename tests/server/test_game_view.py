@@ -2,7 +2,7 @@ from tests.server.game_server_test_case import GameServerTestCase
 
 from aiohttp.test_utils import unittest_run_loop as sync
 
-from engine.web.views.game_view import GameView
+from gloop.web.views.game_view import GameView
 
 
 class TestGameView(GameServerTestCase):

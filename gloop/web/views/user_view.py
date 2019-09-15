@@ -2,11 +2,11 @@ from aiohttp import web
 
 from aiohttp_cors import CorsViewMixin
 
-from engine.repositories.data_ports import dict_to_password_hashed_dict
-from engine.repositories.user_repository import UserRepository
+from gloop.repositories.data_ports import dict_to_password_hashed_dict
+from gloop.repositories.user_repository import UserRepository
 
-import engine.web.app_schema as app_schema
-from engine.web.views.data_ports import user_to_secure_json_serializable_dict
+import gloop.web.app_schema as app_schema
+from gloop.web.views.data_ports import user_to_secure_json_serializable_dict
 
 
 class UserView(web.View, CorsViewMixin):

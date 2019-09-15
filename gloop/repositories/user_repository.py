@@ -8,8 +8,8 @@ from abc import (
     abstractmethod
 )
 
-from engine.models.user import User
-from engine.repositories.data_ports import pass_by
+from gloop.models.user import User
+from gloop.repositories.data_ports import pass_by
 
 
 class UserRepository(ABC):

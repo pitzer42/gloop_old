@@ -1,4 +1,4 @@
-from engine.web.server import (
+from gloop.web.server import (
     create_game_app,
     start_game_server
 )

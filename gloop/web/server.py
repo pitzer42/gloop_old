@@ -1,16 +1,16 @@
 import aiohttp_cors
 from aiohttp import web
 
-from engine.models.game_loop import empty_game_loop
-from engine.models.remote_party import RemotePartyFactory
+from gloop.models.game_loop import empty_game_loop
+from gloop.models.remote_party import RemotePartyFactory
 
-from engine.repositories.mongo import mongo_user_repository_factory
+from gloop.repositories.mongo import mongo_user_repository_factory
 
-from engine.web import app_schema
+from gloop.web import app_schema
 
-from engine.web.views.user_view import UserView
-from engine.web.views.game_view import GameView
-from engine.web.views.auth_view import AuthView
+from gloop.web.views.user_view import UserView
+from gloop.web.views.game_view import GameView
+from gloop.web.views.auth_view import AuthView
 
 
 def _create_cors(app: web.Application):
