@@ -1,9 +1,10 @@
-[![Build Status](https://travis-ci.com/pitzer42/micro-tcg.svg?branch=new)](https://travis-ci.com/pitzer42/micro-tcg)
-# Multiplayer Game Loop Server
-Build quick prototypes by serving your multiplayer game logic. Offers:
-* Basic user auth :heavy_check_mark:
-* Async player gathering :heavy_check_mark:
-* Extensible through game loop :heavy_check_mark:
+[![Build Status](https://travis-ci.com/pitzer42/gloop.svg?branch=master)](https://travis-ci.com/pitzer42/gloop)
+# gLoop
+You write the game loop logic, gLoop serves it. With gLoop you can:
+* Gather player connections into a single match
+* Authenticate users
+* Extend it by following the clean architecture patterns
 
-##TODO
+## TODO
 * Examples (pong and jokenpo)
+* Improve resilience in fail cases
