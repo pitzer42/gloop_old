@@ -23,3 +23,4 @@ class GameView(web.View, CorsViewMixin):
         await ws.prepare(self.request)
         player = WebSocketPlayer(ws)
         await self.use_case.start_game(player)
+        return ws
