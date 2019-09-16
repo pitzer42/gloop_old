@@ -9,5 +9,11 @@ setup(
     license='',
     author='Arthur Pitzer',
     author_email='',
-    description=''
+    description='',
+    install_requires=[
+        'aiohttp',
+        'aiohttp_cors',
+        'motor',
+        'bcrypt'
+    ]
 )
