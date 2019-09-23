@@ -5,7 +5,7 @@ from gloop.models.remote_party import RemoteParty
 
 from gloop.web.server import (
     create_game_app,
-    start_game_server
+    start_game_app
 )
 
 
@@ -64,4 +64,4 @@ class JoKenPo:
 
 if __name__ == '__main__':
     game = create_game_app(game_loop=JoKenPo())
-    start_game_server(game)
+    start_game_app(game)

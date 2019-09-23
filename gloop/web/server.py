@@ -48,5 +48,5 @@ def create_game_app(
     return app
 
 
-def start_game_server(game_app):
+def start_game_app(game_app):
     web.run_app(game_app)

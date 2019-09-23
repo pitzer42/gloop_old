@@ -1,9 +1,9 @@
 from gloop.web.server import (
     create_game_app,
-    start_game_server
+    start_game_app
 )
 
 if __name__ == '__main__':
     server = create_game_app()
-    start_game_server(server)
+    start_game_app(server)
 
