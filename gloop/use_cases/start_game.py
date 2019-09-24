@@ -1,8 +1,8 @@
 import bcrypt
 from time import time
 
-from gloop.models.remote_player import RemotePlayer
-from gloop.models.remote_party import RemotePartyFactory
+from gloop.entities.remote_player import RemotePlayer
+from gloop.entities.remote_party import RemotePartyFactory
 
 ACK_MESSAGE = dict(
     message='waiting for other players to join the party.'

@@ -2,7 +2,7 @@ from typing import List, NoReturn
 
 from motor.motor_asyncio import AsyncIOMotorClient
 
-from gloop.models.user import User
+from gloop.entities.user import User
 from gloop.repositories.user_repository import UserRepository
 import gloop.repositories.schemas.user_schema as schema
 from gloop.repositories.data_ports import (

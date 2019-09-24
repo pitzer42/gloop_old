@@ -1,94 +1,38 @@
 import random
 
+from gloop.entities.remote_party import RemoteParty
+from gloop.entities.remote_player import RemotePlayer
+
 from examples.mtg.entities.match import Match
 from examples.mtg.entities.mtg_remote_player import MtgRemotePlayer
 
-from gloop.models.remote_party import RemoteParty
-from gloop.models.remote_player import RemotePlayer
+from examples.mtg.entities.game_steps.setup import setup
+from examples.mtg.entities.game_steps.mulligan import mulligan
+from examples.mtg.entities.game_steps.upkeep import upkeep
+from examples.mtg.entities.game_steps.game_over import game_over
+from examples.mtg.entities.game_steps.main_phase import main_phase
 
 
 async def mtg_game_loop(main_player: RemotePlayer, party: RemoteParty):
-
+    first = main_player == party[0]
     main_player = MtgRemotePlayer(main_player)
-    await main_player.send('starting match')
 
     match = Match(party)
-    hand = main_player.hand
-    field = main_player.field
-    deck = main_player.deck
 
-    for i in range(4):
-        deck.append('Serra Angel')
-        deck.append('Plains')
-    random.shuffle(deck)
+    await setup(main_player)
 
-    hand_size = 7
-    required_mulligan = True
+    try:
+        await mulligan(main_player)
+    except IndexError:
+        await game_over(party, loser=main_player)
 
-    while required_mulligan and hand_size > 0:
-        hand = deck.draw(n=hand_size)
-        msg = dict(
-            hand=hand
-        )
-        await main_player.send(msg)
-        await main_player.send('mulligan?(y/n)')
-        msg = await main_player.receive()
-        required_mulligan = msg == 'y'
+    if first:  # main_player == party[0]:
+        try:
+            await upkeep(main_player)
+        except IndexError:
+            await game_over(party, loser=main_player)
 
-        # mulligan step
-        if required_mulligan:
-            for card in hand:
-                deck.append(card)
-            random.shuffle(deck)
-            hand_size -= 1
-
-    # game-over by empty hand
-    if hand_size == 0:
-        msg = dict(
-            msg='you have lost'
-        )
-        await main_player.send(msg)
-
-        msg = dict(
-            msg=f'{main_player.id} have lost'
-        )
-        await main_player.send(msg)
-
-    random.shuffle(party)
-
-    field.untap()
-
-    card = deck.draw()
-    hand.append(card)
-
-    msg = dict(
-        hand=hand,
-        field=field
-    )
-    await main_player.send(msg)
-
-    move = await main_player.receive()
-
-    def yield_command(*args, **kwargs):
-        pass
-
-    def activate_card_command(*args, **kwargs):
-        pass
-
-    def play_from_hand_command(*args, **kwargs):
-        pass
-
-    command = {
-        'yield': yield_command,
-        'activate_card': activate_card_command,
-        'play_from_hand': play_from_hand_command,
-    }.get(move)
-
-    match.stack.append(command)
-
-    """
-    move
-        yield
-        activate card in field
-        play card from hand
-    """
+        await main_phase(main_player, match)
+    else:
+        import asyncio
+        await asyncio.Event().wait()

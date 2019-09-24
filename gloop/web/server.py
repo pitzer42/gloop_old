@@ -1,8 +1,8 @@
 import aiohttp_cors
 from aiohttp import web
 
-from gloop.models.game_loop import empty_game_loop
-from gloop.models.remote_party import RemotePartyFactory
+from gloop.entities.game_loop import empty_game_loop
+from gloop.entities.remote_party import RemotePartyFactory
 
 from gloop.repositories.mongo import mongo_user_repository_factory
 

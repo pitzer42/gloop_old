@@ -1,4 +1,4 @@
-from gloop.models.user import User
+from gloop.entities.user import User
 
 _i = 0
 

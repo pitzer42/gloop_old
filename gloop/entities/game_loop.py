@@ -1,7 +1,7 @@
 from typing import NoReturn
 
-from gloop.models.remote_party import RemoteParty
-from gloop.models.remote_player import RemotePlayer
+from gloop.entities.remote_party import RemoteParty
+from gloop.entities.remote_player import RemotePlayer
 
 
 async def default_game_loop(player: RemotePlayer, party: RemoteParty) -> NoReturn:

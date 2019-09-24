@@ -8,7 +8,7 @@ from abc import (
     abstractmethod
 )
 
-from gloop.models.user import User
+from gloop.entities.user import User
 from gloop.repositories.data_ports import pass_by
 
 
