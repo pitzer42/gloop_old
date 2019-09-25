@@ -1,7 +1,6 @@
 import random
 
-from gloop.entities.remote_player import RemotePlayer
-
+from examples.mtg.entities.card import Card
 from examples.mtg.entities.deck import Deck
 from examples.mtg.entities.mtg_remote_player import MtgRemotePlayer
 
@@ -15,19 +14,6 @@ def create_message():
         msg=MESSAGE,
         options=ANSWER_OPTIONS
     )
-
-
-class Card:
-
-    def __init__(self, name, cost):
-        self.name = name
-        self.cost = cost
-
-    def __str__(self):
-        return self.name
-
-    def __repr__(self):
-        return str(self)
 
 
 def deck_1():

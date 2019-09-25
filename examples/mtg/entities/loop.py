@@ -11,22 +11,21 @@ from examples.mtg.entities.game_steps.mulligan import mulligan
 from examples.mtg.entities.game_steps.upkeep import upkeep
 from examples.mtg.entities.game_steps.game_over import game_over
 from examples.mtg.entities.game_steps.main_phase import main_phase
+from examples.mtg.entities.game_steps.initial_draw import initial_draw
 
 
 async def mtg_game_loop(main_player: RemotePlayer, party: RemoteParty):
-    first = main_player == party[0]
-    main_player = MtgRemotePlayer(main_player)
-
     match = Match(party)
+    main_player = MtgRemotePlayer(main_player)
+    first = main_player == party[0]
 
     await setup(main_player)
-
-    try:
-        await mulligan(main_player)
-    except IndexError:
+    await initial_draw(main_player)
+    await mulligan(main_player)
+    if len(main_player.hand) == 0:
         await game_over(party, loser=main_player)
 
-    if first:  # main_player == party[0]:
+    if first:
         try:
             await upkeep(main_player)
         except IndexError:
