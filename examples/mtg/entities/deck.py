@@ -1,3 +1,6 @@
+import random
+
+
 class Deck(list):
 
     def draw(self, n=1):
@@ -8,3 +11,6 @@ class Deck(list):
         if n == 1:
             return drawn[0]
         return drawn
+
+    def shuffle(self):
+        random.shuffle(self)

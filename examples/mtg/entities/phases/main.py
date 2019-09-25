@@ -12,19 +12,26 @@ ANSWER_OPTIONS = (
 
 
 async def play_from_hand(player: MtgRemotePlayer, match):
-    options = list()
-    indexer = 0
-    for card in player.hand:
-        options.append(
-            f'{indexer}-{card}'
-        )
-        indexer += 1
-    index = None
-    while index is None:
-        msg = dict(
+    not_enought_resources_message = dict(
+        msg='you do not have enough resources to play this'
+    )
+
+    def create_hand_options_message():
+        counter = 0
+        options = list()
+        for card in player.hand:
+            options.append(
+                f'{counter}-{card}'
+            )
+            counter += 1
+        return dict(
             msg='which card do you want to play?',
             options=options
         )
+
+    index = None
+    while index is None:
+        msg = create_hand_options_message()
         await player.send(msg)
         try:
             index = await player.receive()
@@ -33,13 +40,11 @@ async def play_from_hand(player: MtgRemotePlayer, match):
                 card = player.hand[index]
                 if player.resources >= card.cost:
                     player.resources -= card.cost
+                    player.hand.pop(index)
                     match.stack.append(card)
                     return
                 else:
-                    msg = dict(
-                        msg='you do not have enough resources to play this'
-                    )
-                    await player.send(msg)
+                    await player.send(not_enought_resources_message)
                     raise ValueError(msg)
         except ValueError:
             index = None
@@ -61,7 +66,7 @@ def create_message():
     )
 
 
-async def main_phase(player: MtgRemotePlayer, match):
+async def main(player: MtgRemotePlayer, match):
     msg = create_message()
     await player.send(msg)
     move_msg = await player.receive()
@@ -73,7 +78,7 @@ async def main_phase(player: MtgRemotePlayer, match):
 
     others = match.others(player)
     other = others[0]
-    await main_phase(other, match)
+    await main(other, match)
 
     print(match.stack)
     # resolve stack
