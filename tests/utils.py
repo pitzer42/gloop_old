@@ -12,8 +12,8 @@ def sync(coroutine):
             _loop = asyncio.new_event_loop()
             asyncio.set_event_loop(_loop)
 
-        future = coroutine(*args, **kwargs)
         try:
+            future = coroutine(*args, **kwargs)
             _loop.run_until_complete(future)
         except RuntimeError:
             future = coroutine(*args, **kwargs)

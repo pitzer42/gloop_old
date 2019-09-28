@@ -8,6 +8,7 @@ from examples.mtg.entities.phases.setup import setup
 from examples.mtg.entities.phases.beginning import beginning
 from examples.mtg.entities.phases.game_over import game_over
 from examples.mtg.entities.phases.main import main
+from examples.mtg.entities.phases.combat import combat
 
 
 async def mtg_game_loop(main_player: RemotePlayer, party: RemoteParty):
@@ -24,7 +25,8 @@ async def mtg_game_loop(main_player: RemotePlayer, party: RemoteParty):
             await beginning(main_player)
         except IndexError:
             await game_over(party, loser=main_player)
-
+        await main(main_player, match)
+        await combat(main_player, match)
         await main(main_player, match)
     else:
         import asyncio

@@ -21,18 +21,27 @@ class ScriptedPlayer(RemotePlayer):
         return self.buffer.pop()
 
     async def send(self, message):
-        try:
-            script = next(self.script)
-            reply = script(message)
-            self.buffer.append(reply)
-        except StopIteration:
-            self.buffer.append(message)
+        script = next(self.script)
+        reply = script(message)
+        self.buffer.append(reply)
+
+
+options_key = 'options'
 
 
 def chose(i=0):
-    options_key = 'options'
-    return lambda message: message[options_key][i]
+    def _chose(message):
+        return message[options_key][i]
+    return _chose
 
-def chose_option(message: dict, i=0):
-    options_key = 'options'
-    return message[options_key][i]
+
+def chose_card(card_name):
+    def _chose_card_with_cost(message):
+        i = 0
+        options = message[options_key]
+        for option in options:
+            if card_name in option:
+                return i
+            i += 1
+    return _chose_card_with_cost
+

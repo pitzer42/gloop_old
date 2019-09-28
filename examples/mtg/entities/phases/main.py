@@ -10,6 +10,31 @@ ANSWER_OPTIONS = (
     NOTHING
 )
 
+MAIN_PHASE_MESSAGE = dict(
+    msg=INQUIRE_MESSAGE,
+    options=ANSWER_OPTIONS
+)
+
+
+async def main(player: MtgRemotePlayer, match):
+    await player.send(MAIN_PHASE_MESSAGE)
+    move_msg = await player.receive()
+
+    while move_msg != NOTHING and move_msg in ANSWER_OPTIONS:
+        move = move_map.get(move_msg)
+        await move(player, match)
+
+        other = match.others(player)[0]
+        await other.send(MAIN_PHASE_MESSAGE)
+        move_msg = await other.receive()
+
+        if move_msg != NOTHING and move_msg in ANSWER_OPTIONS:
+            move = move_map.get(move_msg)
+            await move(other, match)
+            move_msg = await player.send(MAIN_PHASE_MESSAGE)
+
+    match.stack.solve()
+
 
 async def play_from_hand(player: MtgRemotePlayer, match):
     not_enought_resources_message = dict(
@@ -51,37 +76,37 @@ async def play_from_hand(player: MtgRemotePlayer, match):
 
 
 async def play_from_field(player: MtgRemotePlayer, match):
-    pass
 
-move_switch = {
+    def create_field_options_message():
+        counter = 0
+        options = list()
+        for card in player.field:
+            options.append(
+                f'{counter}-{card}'
+            )
+            counter += 1
+        return dict(
+            msg='which card do you want to play?',
+            options=options
+        )
+
+    index = None
+    while index is None:
+        msg = create_field_options_message()
+        await player.send(msg)
+        try:
+            index = await player.receive()
+            index = int(index)
+            while 0 <= index < len(player.field):
+                card = player.field[index]
+                match.stack.append(card)
+        except ValueError:
+            index = None
+
+move_map = {
     PLAY_FROM_HAND: play_from_hand,
     PLAYER_FROM_FIELD: play_from_field
 }
-
-
-def create_message():
-    return dict(
-        msg=INQUIRE_MESSAGE,
-        options=ANSWER_OPTIONS
-    )
-
-
-async def main(player: MtgRemotePlayer, match):
-    msg = create_message()
-    await player.send(msg)
-    move_msg = await player.receive()
-    while move_msg != NOTHING and move_msg in ANSWER_OPTIONS:
-        move = move_switch.get(move_msg)
-        await move(player, match)
-        msg = create_message()
-        move_msg = await player.send(msg)
-
-    others = match.others(player)
-    other = others[0]
-    await main(other, match)
-
-    print(match.stack)
-    # resolve stack
 
 
 

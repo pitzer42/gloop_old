@@ -11,7 +11,7 @@ async def _upkeep(player: MtgRemotePlayer):
 
 async def _draw(player: MtgRemotePlayer):
     card = player.deck.draw()
-    player.hand.append(card)
+    player.hand.extend(card)
 
 
 async def beginning(player: MtgRemotePlayer):

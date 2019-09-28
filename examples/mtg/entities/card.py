@@ -11,6 +11,9 @@ class Card:
     def untap(self):
         self.is_tapped = False
 
+    def apply(self):
+        pass
+
     def __str__(self):
         return self.name
 

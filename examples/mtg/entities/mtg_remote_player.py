@@ -22,4 +22,4 @@ class MtgRemotePlayer(RemotePlayer):
         return await self._player.send(message)
 
     async def receive(self) -> str:
-        return await self.receive()
+        return await self._player.receive()
