@@ -1,3 +1,5 @@
+from examples.mtg.entities.phases import create_indexed_list
+
 from examples.mtg.entities.mtg_remote_player import MtgRemotePlayer
 
 INQUIRE_MESSAGE = 'what do you want to do?'
@@ -42,16 +44,10 @@ async def play_from_hand(player: MtgRemotePlayer, match):
     )
 
     def create_hand_options_message():
-        counter = 0
-        options = list()
-        for card in player.hand:
-            options.append(
-                f'{counter}-{card}'
-            )
-            counter += 1
+
         return dict(
             msg='which card do you want to play?',
-            options=options
+            options=create_indexed_list(player.hand)
         )
 
     index = None
