@@ -4,13 +4,9 @@ from aiohttp import web
 from gloop.entities.game_loop import empty_game_loop
 from gloop.entities.remote_party import RemotePartyFactory
 
-from gloop.repositories.mongo import mongo_user_repository_factory
-
 from gloop.web import app_schema
 
-from gloop.web.views.user_view import UserView
 from gloop.web.views.game_view import GameView
-from gloop.web.views.auth_view import AuthView
 
 
 def _create_cors(app: web.Application):
@@ -24,19 +20,15 @@ def _create_cors(app: web.Application):
 
 
 def create_game_app(
-        user_repo_factory=mongo_user_repository_factory,
-        game_loop=empty_game_loop,
-        party_size=2):
+        party_size=2,
+        game_loop=empty_game_loop):
 
     app = web.Application()
-    app[app_schema.user_repo] = user_repo_factory()
     app[app_schema.party_factory] = RemotePartyFactory(party_size)
     app[app_schema.game_loop] = game_loop
 
     view_register = [
-        UserView,
-        GameView,
-        AuthView
+        GameView
     ]
 
     cors = _create_cors(app)

@@ -1,5 +1,7 @@
 import asyncio
 
+from unittest.mock import Mock
+
 _loop = None
 
 
@@ -20,3 +22,9 @@ def sync(coroutine):
             asyncio.run_coroutine_threadsafe(future, _loop)
 
     return wrapper
+
+
+def make_async_mock(mock: Mock):
+    future = asyncio.Future()
+    future.set_result(Mock())
+    mock.return_value = future

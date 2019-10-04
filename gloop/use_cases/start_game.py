@@ -1,6 +1,3 @@
-import bcrypt
-from time import time
-
 from gloop.entities.remote_player import RemotePlayer
 from gloop.entities.remote_party import RemotePartyFactory
 
