@@ -1,2 +1,5 @@
 party_factory = 'party_factory'
 game_loop = 'game_loop'
+new_client_channel = 'new_conns'
+new_match_channel = 'new_match'
+channel_factory = 'broker_factory'
