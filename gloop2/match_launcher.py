@@ -8,6 +8,8 @@ from gloop2.channels.redis import create_write_only_channel
 from gloop2.channels.redis import create_read_only_channel
 from gloop2.channels.redis import RedisChannel
 
+from gloop2.game_loop import listen_to_channel
+
 MATCH_SIZE = 2
 clients = list()
 waiting_list: RedisChannel = None
@@ -26,7 +28,8 @@ async def launch_match(message):
     global clients
     clients.append(message)
     if len(clients) == MATCH_SIZE:
-        match_name = str(randint(1000, 9999))
+        match_name = 'match_' + str(randint(1000, 9999))
+        await listen_to_channel(match_name)
         # match = await create_channel(match_name)
         clients.clear()
         return match_name

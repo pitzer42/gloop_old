@@ -11,13 +11,12 @@ async def run_client():
             msg = await ws.receive_str()
             print(msg)
 
+            """
             msg = input()
             if msg != '':
                 print(f'sending "{msg}"')
                 await ws.send_json(msg)
+            """
 
 if __name__ == '__main__':
-    loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(loop)
-    loop.run_until_complete(run_client())
-    loop.close()
+    asyncio.run(run_client())

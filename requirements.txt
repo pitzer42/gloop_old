@@ -1,3 +1,4 @@
+aioredis
 aiohttp==3.5.4
 aiohttp-cors==0.7.0
 asgiref==3.2.1

@@ -3,7 +3,7 @@ from aiohttp import web
 from gloop2.channels import web_socket
 
 from gloop2.channels.redis import RedisChannel
-from gloop2.channels import redis
+from gloop2.channels import redis as redis
 
 
 waiting_list: RedisChannel = None
@@ -34,6 +34,7 @@ async def index(request):
     await ws.send(match)
     print(f'sending {match} to {name}')
     return ws._ws
+
 
 if __name__ == '__main__':
     app = web.Application()

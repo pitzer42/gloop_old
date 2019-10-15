@@ -72,7 +72,8 @@ if __name__ == '__main__':
         channel_1 = await create_read_only_channel('in')
         channel_2 = await create_write_only_channel('out')
 
-        def increment(message):
+        async def increment(message):
+            print(int(message) + 1)
             return int(message) + 1
 
         await run_transformer(increment, channel_1, channel_2)
