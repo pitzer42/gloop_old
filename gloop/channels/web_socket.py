@@ -15,8 +15,9 @@ class WebSocketChannel(Channel):
         self._ws = None
 
     async def open(self):
-        self._ws = WebSocketResponse()
-        await self._ws.prepare(self._request)
+        if self._ws is None:
+            self._ws = WebSocketResponse()
+            await self._ws.prepare(self._request)
 
     async def receive(self):
         ws_record = await self._ws.receive()

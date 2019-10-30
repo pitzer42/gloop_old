@@ -66,7 +66,7 @@ async def test_multiple_consumers(channel_factory):
 
     n_consumers = 2
     ready_consumers = [0]
-    expected_message = b'foo'
+    expected_message = 'foo'
 
     async def consumer():
         consumer_channel = channel_factory()

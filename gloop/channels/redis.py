@@ -2,7 +2,8 @@ import aioredis
 
 from gloop.channels import Channel
 
-DEFAULT_REDIS_ADDRESS = 'redis://localhost:6379'
+# 'redis://localhost:6379'
+DEFAULT_REDIS_ADDRESS = 'redis://172.17.0.3:6379'
 MESSAGE_KEY = b'message'
 
 
@@ -17,7 +18,8 @@ class RedisChannel(Channel):
         self._redis = None
 
     async def open(self):
-        self._redis = await aioredis.create_redis(self._address)
+        if self._redis is None:
+            self._redis = await aioredis.create_redis(self._address)
 
     async def receive(self):
         streams = [self._name]

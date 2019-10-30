@@ -20,9 +20,9 @@ async def run_client():
             while msg is not None:
                 msg = await ws.receive()
                 msg = str(msg.data)
-                print(msg)
-                if msg is None:
+                if msg == str(None):
                     return 1
+                print(msg)
                 await asyncio.sleep(1)
 
         if len(sys.argv) > 1:
